@@ -1,6 +1,6 @@
 ---
 - name: Install apache and upload webpage
-  hosts: all
+  hosts: server
   become: yes
 
   roles:
