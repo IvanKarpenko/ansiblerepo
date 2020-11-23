@@ -1,0 +1,5 @@
+[defaults]
+host_key_cheking = false
+inventory        = ~/ansible/hosts
+[servers:vars]
+ansible_python_interpreter=/usr/bin/python3

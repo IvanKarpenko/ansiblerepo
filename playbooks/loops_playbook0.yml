@@ -1,0 +1,29 @@
+---
+- name: Loops paybook
+  hosts: all
+  become: yes
+
+
+  tasks:
+    - name: Say hi 
+      debug: msg="Hello {{ item }}"
+      loop:
+        - "Uber"
+        - "Google"
+    - name: Loop until example
+      shell: echo -n Z >> myfile.txt && cat myfile.txt
+      register: output
+      delay: 2
+      retries: 10
+      until: output.stdout.find("ZZZZ") == false
+
+    - name: print final output
+      debug:
+        var: output.stdout
+
+    - name: install many
+      yum: name={{ item }} state=installed
+      loop:
+        - python
+        - tree
+        - nginx

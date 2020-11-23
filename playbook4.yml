@@ -1,0 +1,7 @@
+---
+- name: Install apache and upload webpage
+  hosts: all
+  become: yes
+
+  roles:
+   - depoy_apache_web

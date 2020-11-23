@@ -1,0 +1,4 @@
+---
+# defaults file for depoy_apache_web
+destin: /var/www/html
+

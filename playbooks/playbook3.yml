@@ -1,0 +1,37 @@
+---
+- name: Another my playbook
+  hosts: all
+  become: yes
+
+
+  vars:
+    message1: Hey
+    message2: hello
+    secret: ubersholder
+
+  tasks:
+
+  - name: Print sec var
+    debug:
+      var: secret
+
+  - debug:
+      msg: "secret word is {{ secret  }}"
+
+  - debug:
+      msg: "owner of this server is -->> {{ owner }}<<--"
+
+  - set_fact: full_message= "{{ message1 }} {{ message2 }} from {{ owner }}"
+
+  - debug:
+      var: full_message
+
+
+  - debug:
+      var: ansible_distribution
+ 
+  - shell: uptime
+    register: results
+
+  - debug:
+      var: results.end

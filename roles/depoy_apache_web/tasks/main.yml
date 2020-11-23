@@ -1,0 +1,32 @@
+---
+# tasks file for depoy_apache_web
+ 
+  - block: #=============FOR REDHAT==============#
+      - name: install apache webserver for RedHat OS's
+        yum: name=httpd state=latest
+      - name: start webserver and make it enable for RedHat
+        service: name=httpd state=started enabled=yes
+ 
+    when: ansible_os_family == "RedHat"
+  
+  - block: #==========FOR UBUNTU===============#
+      - name: Apache webserver for Debian OS's
+        apt: name=apache2 state=latest
+      - name: Start webserver service for Debian
+        service: name=apache2 state=started enabled=yes
+ 
+    when: ansible_os_family == "Debian"
+  
+  - name: generate index
+    template: src=index.j2 dest={{ destin }}/index.html mode=0555
+    notify:
+      - Restart apache RedHat
+      - Restart apache Debian
+ 
+  - name: copy homepage to webserver
+    copy: src={{ item }} dest={{ destin }} mode=0555
+    loop:
+      - "my.png"
+    notify:
+      - Restart apache RedHat
+      - Restart apache Debian
