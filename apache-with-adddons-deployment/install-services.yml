@@ -1,0 +1,19 @@
+---
+  - hosts: loadbalancers
+    become: true 
+    tasks:
+      - name: apache install
+        yum: name=httpd state=present
+      - name: start and enable apache
+        service: name=httpd state=started enabled=yes
+  - hosts: webservers
+    become: true
+    tasks:
+      - name: install services
+        yum:
+          name:
+            - httpd
+            - php
+          state: present
+      - name: start apahe on boot
+        service: name=httpd state=started enabled=yes

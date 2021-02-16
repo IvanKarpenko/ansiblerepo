@@ -1,0 +1,14 @@
+ProxyRequests off
+<Proxy balancer://webcluster >
+    BalancerMember http://ec2-3-65-34-124.eu-central-1.compute.amazonaws.com
+    BalancerMember http://ec2-18-185-18-218.eu-central-1.compute.amazonaws.com
+    ProxySet lbmethod=byrequests
+</Proxy>
+
+# Optional
+<Location /balancer-manager>
+  SetHandler balancer-manager
+</Location>
+
+ProxyPass /balancer-manager !
+ProxyPass / balancer://webcluster/

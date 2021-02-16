@@ -1,0 +1,6 @@
+---
+  - hosts: webservers:loadbalancers 
+    become: true
+    tasks:
+      - name: update all
+        yum: name=* state=present 
