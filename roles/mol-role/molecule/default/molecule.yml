@@ -1,0 +1,11 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+
+platforms:
+  - name: instance
+    box: fedora/32-cloud-base
+    memory: 512
+    cpus: 1
