@@ -1,11 +1,11 @@
 ---
 - name: Loops paybook
   hosts: all
-  become: yes
+  become: true
 
 
   tasks:
-    - name: Say hi 
+    - name: Say hi
       debug: msg="Hello {{ item }}"
       loop:
         - "Uber"
@@ -22,7 +22,9 @@
         var: output.stdout
 
     - name: install many
-      yum: name={{ item }} state=installed
+      yum:
+        - name: {{item}}
+          state: installed
       loop:
         - python
         - tree

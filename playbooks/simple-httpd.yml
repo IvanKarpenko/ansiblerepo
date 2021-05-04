@@ -1,12 +1,17 @@
 ---
 - name: Install httpd
   hosts: all
-  become: yes
+  become: true
 
   tasks:
     - name: Install apache web-server
-      yum:  name=httpd state=latest
+      yum:
+        name: httpd
+        state: latest
 
 
     - name: Start apache and enable on boot
-      service: name=httpd state=started enabled=yes
+      service:
+        name: httpd
+        state: started
+        enabled: true

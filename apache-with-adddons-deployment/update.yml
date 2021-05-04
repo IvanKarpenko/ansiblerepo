@@ -3,4 +3,6 @@
     become: true
     tasks:
       - name: update all
-        yum: name=* state=present 
+        yum:
+          name: *
+          state: present 

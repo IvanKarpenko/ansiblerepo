@@ -1,15 +1,17 @@
 ---
 - name: one more
   hosts: all
-  become: yes
+  become: true
 
 
   tasks:
   - name: Task1
-    yum: name=treeee state=latest
-    ignore_errors: yes
-  - name: task2 
-    shell: echo hello World!!! 
+    yum:
+      name: treeee
+      state: latest
+    ignore_errors: true
+  - name: task2
+    shell: echo hello World!!!
     register: results
     failed_when: results.rc == 0
       # failed_when: "'World' in results.stdout"
