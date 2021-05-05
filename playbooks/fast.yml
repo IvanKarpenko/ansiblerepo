@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: true
+
+  vars:
+    username: ubuntu
+    package: apache2
+  tasks:
+    - name: install
+      apt:
+        name: '{{ package }}'
+        state: present
+    - name: start apache
+      service:
+        name: '{{ package }}'
+        state: started
+        enabled: true
+    - name: create file
+      file:
+        path: '/home/{{ username }}/uber'
+        state: touch
+        owner: '{{ username }}'
+        group: '{{ username }}'
+        mode: '0777'
+    - name: url check
+      get_url:
+        url: https://google.com
+        dest: '/home/{{ username }}/uber'
