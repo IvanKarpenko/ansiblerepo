@@ -1,2 +1,8 @@
 ---
-# tasks file for mol-role
+- hosts: all
+  become: true
+  tasks:
+    - name: make sure if httpd is installed
+      yum: name=httpd state=present
+    - name: make sure that httpd is running
+      service: name=httpd state=started enabled=yes
